@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaTour.API", "AviaTour.API\AviaTour.API.csproj", "{BA46215B-147C-4FA4-8AED-7EE7234DC06B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaTour.Domain", "AviaTour.Domain\AviaTour.Domain.csproj", "{98D18C68-4C11-4C98-BCD8-2392B764A141}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaTour.Application", "AviaTour.Application\AviaTour.Application.csproj", "{E82C437E-EB07-4C2E-8645-F1A3162C0136}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaTour.Infrastructure", "AviaTour.Infrastructure\AviaTour.Infrastructure.csproj", "{DB94B317-A96D-4322-9A74-9DFA3093B039}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA46215B-147C-4FA4-8AED-7EE7234DC06B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA46215B-147C-4FA4-8AED-7EE7234DC06B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA46215B-147C-4FA4-8AED-7EE7234DC06B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA46215B-147C-4FA4-8AED-7EE7234DC06B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98D18C68-4C11-4C98-BCD8-2392B764A141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98D18C68-4C11-4C98-BCD8-2392B764A141}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98D18C68-4C11-4C98-BCD8-2392B764A141}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98D18C68-4C11-4C98-BCD8-2392B764A141}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E82C437E-EB07-4C2E-8645-F1A3162C0136}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E82C437E-EB07-4C2E-8645-F1A3162C0136}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E82C437E-EB07-4C2E-8645-F1A3162C0136}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E82C437E-EB07-4C2E-8645-F1A3162C0136}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB94B317-A96D-4322-9A74-9DFA3093B039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB94B317-A96D-4322-9A74-9DFA3093B039}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB94B317-A96D-4322-9A74-9DFA3093B039}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB94B317-A96D-4322-9A74-9DFA3093B039}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5B35CE88-BBBD-4A08-A45E-9E659D6090B2}
+	EndGlobalSection
+EndGlobal
