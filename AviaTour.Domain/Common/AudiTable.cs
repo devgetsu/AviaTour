@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AviaTour.Domain.Common
 {
-    public abstract class AudiTable
+    public abstract class AudiTable : BaseEntity
     {
         public DateTimeOffset CreatedAt { get; set; }
         public DateTimeOffset ModifiedAt { get; set; }

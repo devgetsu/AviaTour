@@ -1,4 +1,5 @@
 ﻿using AviaTour.Application.Models;
+using AviaTour.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace AviaTour.Application.UseCases.Comments.Commands
 {
-    public class CreateCommentCommand : IRequest<ResponseModel>
+    public class DeleteCommentCommand : IRequest<ResponseModel>
     {
-        public string To { get; set; }
-        public string From { get; set; }
-        public string Message { get; set; }
+        public long Id { get; set; }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using AviaTour.Application.Abstractions;
 using AviaTour.Application.Models;
 using AviaTour.Application.UseCases.Comments.Commands;
-using AviaTour.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,28 +11,25 @@ using System.Threading.Tasks;
 
 namespace AviaTour.Application.UseCases.Comments.Handlers.CommandHandlers
 {
-    public class CreateCommentCommandHandler(IApplicationDbContext context) : IRequestHandler<CreateCommentCommand, ResponseModel>
+    public class DeleteCommentCommandHandler(IApplicationDbContext context) : IRequestHandler<DeleteCommentCommand, ResponseModel>
     {
-        private readonly IApplicationDbContext _context = context;
+        public readonly IApplicationDbContext _context = context;
 
-        public async Task<ResponseModel> Handle(CreateCommentCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(DeleteCommentCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                var comment = new Comment()
-                {
-                    From = request.From,
-                    To = request.To,
-                    Message = request.Message,
-                    CreatedAt = DateTimeOffset.UtcNow,
-                };
+                var comment = await _context.Comments.FirstOrDefaultAsync(x => x.Id == request.Id);
+                if (comment == null)
+                    throw new Exception();
 
-                await _context.Comments.AddAsync(comment);
+                comment.isDeleted = true;
+                comment.DeletedAt = DateTimeOffset.UtcNow;
                 await _context.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel()
                 {
-                    Message = "Created",
+                    Message = "Deleted",
                     StatusCode = 200,
                     IsSuccess = true
                 };
@@ -41,7 +38,7 @@ namespace AviaTour.Application.UseCases.Comments.Handlers.CommandHandlers
             {
                 return new ResponseModel()
                 {
-                    Message = ex.Message,
+                    Message = "Created",
                     StatusCode = 200,
                     IsSuccess = true
                 };

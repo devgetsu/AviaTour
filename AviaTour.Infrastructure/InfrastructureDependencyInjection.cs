@@ -12,7 +12,7 @@ namespace AviaTour.Infrastructure
         {
             services.AddDbContext<IApplicationDbContext,AviaTourDbContext>(options =>
             {
-                options.UseNpgsql(configuration.GetConnectionString(""));
+                options.UseNpgsql(configuration.GetConnectionString("DefCon"));
             });
 
             return services;

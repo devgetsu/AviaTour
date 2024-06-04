@@ -10,13 +10,14 @@ using System.Threading.Tasks;
 
 namespace AviaTour.Application.UseCases.Comments.Handlers.QueryHandlers
 {
-    public class GetCommentByFromQueryHandler(IApplicationDbContext context) : IRequestHandler<GetCommentByFromQuery, IEnumerable<Comment>>
+    public class GetCommentByFromQueryHandler(IApplicationDbContext context) : IRequestHandler<GetCommentByToQuery, IEnumerable<Comment>>
     {
         private readonly IApplicationDbContext _context = context;
 
-        public Task<IEnumerable<Comment>> Handle(GetCommentByFromQuery request, CancellationToken cancellationToken)
+        public Task<IEnumerable<Comment>> Handle(GetCommentByToQuery request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
+            // hozircha bitta model uchun yozib chiqamiz to uchun alohida model ochilishi kerak
         }
     }
 }
