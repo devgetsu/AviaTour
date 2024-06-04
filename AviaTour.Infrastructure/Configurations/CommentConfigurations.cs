@@ -24,10 +24,6 @@ namespace AviaTour.Infrastructure.Configurations
             builder.Property(x => x.Message)
                 .HasMaxLength(120);
 
-            builder.HasOne<Tour>()
-                .WithMany(t=>t.Comments)
-                .HasForeignKey(c=>c.TourId)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
