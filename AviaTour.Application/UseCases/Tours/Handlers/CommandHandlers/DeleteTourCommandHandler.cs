@@ -3,6 +3,7 @@ using AviaTour.Application.Models;
 using AviaTour.Application.UseCases.Tours.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,19 @@ namespace AviaTour.Application.UseCases.Tours.Handlers.CommandHandlers
         {
             try
             {
+                var tour = await _context.Tours.FirstOrDefaultAsync(x => x.Id == request.Id);
+                
+                if (tour == null)
+                    throw new Exception();
+                
+                tour.IsDeleted = true;
+
+                _context.Tours.Remove(tour);
+                await _context.SaveChangesAsync(cancellationToken);
+
                 return new ResponseModel()
                 {
-                    Message = "",
+                    Message = "Deleted Successfully",
                     IsSuccess = true,
                     StatusCode = 200
                 };
