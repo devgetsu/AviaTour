@@ -24,6 +24,7 @@ namespace AviaTour.Application.UseCases.Comments.Handlers.CommandHandlers
                     From = request.From,
                     To = request.To,
                     Message = request.Message,
+                    TourId = request.TourId,
                     CreatedAt = DateTimeOffset.UtcNow,
                 };
 
