@@ -19,6 +19,10 @@ namespace AviaTour.Infrastructure.Persistance
         }
 
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<AboutUs> AboutUs { get; set; }
+        public DbSet<Address> Address { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Email> Emails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
