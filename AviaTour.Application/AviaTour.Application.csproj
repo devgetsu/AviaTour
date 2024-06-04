@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="UseCases\Email\Handlers\QueriesHandler\" />
     <Folder Include="UseCases\Tours\Handlers\QueryHandlers\" />
     <Folder Include="UseCases\Tours\Queries\" />
   </ItemGroup>
