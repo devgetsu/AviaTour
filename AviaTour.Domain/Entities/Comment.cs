@@ -12,6 +12,8 @@ namespace AviaTour.Domain.Entities
         public string From { get; set; }
         public string To { get; set; }
         public string Message { get; set; }
+        public long TourId { get; set; }
         public bool isDeleted { get; set; } = false;
+        public Tour Tour { get; set; }
     }
 }
