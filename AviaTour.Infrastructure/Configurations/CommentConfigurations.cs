@@ -21,7 +21,7 @@ namespace AviaTour.Infrastructure.Configurations
             builder.Property(x => x.To)
                 .HasMaxLength(50);
 
-            builder.Property(x=>x.Message)
+            builder.Property(x => x.Message)
                 .HasMaxLength(120);
 
             builder.HasOne<Tour>()
