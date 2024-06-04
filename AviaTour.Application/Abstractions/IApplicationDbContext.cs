@@ -11,7 +11,7 @@ namespace AviaTour.Application.Abstractions
     public interface IApplicationDbContext
     {
         DbSet<Comment> Comments { get; set; }
-
+        DbSet<Tour> Tours { get; set; }
         ValueTask<int> SaveChangesAsync(CancellationToken cancellationToken = default!);
     }
 }

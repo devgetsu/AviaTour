@@ -19,6 +19,7 @@ namespace AviaTour.Infrastructure.Persistance
         }
 
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Tour> Tours { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
