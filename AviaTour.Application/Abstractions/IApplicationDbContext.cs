@@ -15,7 +15,7 @@ namespace AviaTour.Application.Abstractions
         DbSet<AboutUs> AboutUs { get; set; }
         DbSet<Address> Address { get; set; }
         DbSet<Contact> Contacts { get; set; }
-        DbSet<Email> Emails { get; set; }
+        DbSet<EmailAddressModel> Emails { get; set; }
 
         ValueTask<int> SaveChangesAsync(CancellationToken cancellationToken = default!);
     }

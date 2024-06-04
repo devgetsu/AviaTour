@@ -23,7 +23,7 @@ namespace AviaTour.Infrastructure.Persistance
         public DbSet<AboutUs> AboutUs { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<Contact> Contacts { get; set; }
-        public DbSet<Email> Emails { get; set; }
+        public DbSet<EmailAddressModel> Emails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
