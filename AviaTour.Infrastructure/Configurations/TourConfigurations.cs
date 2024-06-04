@@ -22,12 +22,13 @@ namespace AviaTour.Infrastructure.Configurations
             builder.Property(x => x.Subtitle)
                 .HasMaxLength(170);
 
-            builder.Property("Descripton")
-                .HasMaxLength(1800);
-            
+            builder.Property(x => x.DeletedAt)
+                .HasColumnType("text");
+
+
             builder.HasQueryFilter(x => x.IsDeleted != false);
 
-            
+
         }
     }
 }
