@@ -29,9 +29,9 @@ namespace AviaTour.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<EmailAddressModel>> GetAllEmails([FromQuery] GetAllEmailsQuery request)
+        public async Task<IEnumerable<EmailAddressModel>> GetAllEmails()
         {
-            var result = await _mediatr.Send(request);
+            var result = await _mediatr.Send(new GetAllEmailsQuery());
             return result;
         }
 
