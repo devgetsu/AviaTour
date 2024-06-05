@@ -10,14 +10,9 @@ namespace AviaTour.API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class AddressController : ControllerBase
+    public class AddressController(IMediator mediatr) : ControllerBase
     {
-        private readonly IMediator _mediatr;
-
-        public AddressController(IMediator mediatr)
-        {
-            _mediatr = mediatr;
-        }
+        private readonly IMediator _mediatr = mediatr;
 
         [HttpPost]
         public async Task<ResponseModel> CreateAdress([FromBody] CreateAdressCommand news)
@@ -27,9 +22,10 @@ namespace AviaTour.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Address>> GetAllAddress([FromQuery] GetAllAdressQuery request)
+        public async Task<IEnumerable<Address>> GetAllAddress()
         {
-            var result = await _mediatr.Send(request);
+
+            var result = await _mediatr.Send(new GetAllAdressQuery());
             return result;
         }
 
