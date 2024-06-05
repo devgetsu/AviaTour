@@ -68,7 +68,7 @@ namespace AviaTour.Application.UseCases.Tours.Handlers.CommandHandlers
                 };
             }
 
-            return new ResponseModel
+            return new ResponseModel()
             {
                 Message = "Tour is might be null",
                 StatusCode = 400

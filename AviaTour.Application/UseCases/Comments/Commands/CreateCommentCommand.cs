@@ -13,5 +13,6 @@ namespace AviaTour.Application.UseCases.Comments.Commands
         public string To { get; set; }
         public string From { get; set; }
         public string Message { get; set; }
+        public long TourId { get; set; }
     }
 }

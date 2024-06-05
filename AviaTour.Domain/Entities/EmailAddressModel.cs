@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AviaTour.Domain.Entities
 {
-    public class Email : BaseEntity
+    public class EmailAddressModel : BaseEntity
     {
         public string EmailAddress { get; set; }
     }
