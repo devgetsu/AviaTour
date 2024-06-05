@@ -1,5 +1,7 @@
 ﻿using AviaTour.Application.Models;
 using AviaTour.Application.UseCases.Comments.Commands;
+using AviaTour.Application.UseCases.Comments.Queries;
+using AviaTour.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -46,5 +48,16 @@ namespace AviaTour.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{tourId}")]
+        public async Task<ActionResult<IEnumerable<Comment>>> GetCommentByTourId(long tourId)
+        {
+            var query = new GetCommentsByTourId()
+            {
+                TourId = tourId
+            };
+
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
     }
 }

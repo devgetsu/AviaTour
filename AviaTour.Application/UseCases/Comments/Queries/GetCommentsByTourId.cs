@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace AviaTour.Application.UseCases.Comments.Queries
 {
-    public class GetCommentByToQuery : IRequest<IEnumerable<Comment>>
+    public class GetCommentsByTourId : IRequest<IEnumerable<Comment>>
     {
-        public string To { get; set; }
+        public long TourId { get; set; }
     }
 }

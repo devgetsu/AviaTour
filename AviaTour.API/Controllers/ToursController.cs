@@ -4,8 +4,6 @@ using AviaTour.Application.UseCases.Tours.Queries;
 using AviaTour.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Storage;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace AviaTour.API.Controllers
 {
@@ -26,7 +24,7 @@ namespace AviaTour.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("{pageIndex}/{size}")]
         public async Task<ActionResult<IEnumerable<Tour>>> GetAllToursAsync(int pageIndex, int size)
         {
             var query = new GetAllToursQuery()

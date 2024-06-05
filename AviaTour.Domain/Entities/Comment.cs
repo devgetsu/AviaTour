@@ -10,7 +10,6 @@ namespace AviaTour.Domain.Entities
     public class Comment : AudiTable
     {
         public string From { get; set; }
-        public string To { get; set; }
         public string Message { get; set; }
         public long TourId { get; set; }
         public bool isDeleted { get; set; } = false;

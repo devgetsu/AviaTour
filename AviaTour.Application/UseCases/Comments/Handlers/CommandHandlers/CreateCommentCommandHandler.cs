@@ -22,7 +22,6 @@ namespace AviaTour.Application.UseCases.Comments.Handlers.CommandHandlers
                 var comment = new Comment()
                 {
                     From = request.From,
-                    To = request.To,
                     Message = request.Message,
                     TourId = request.TourId,
                     CreatedAt = DateTimeOffset.UtcNow,
@@ -43,7 +42,7 @@ namespace AviaTour.Application.UseCases.Comments.Handlers.CommandHandlers
                 return new ResponseModel()
                 {
                     Message = ex.Message,
-                    StatusCode = 200,
+                    StatusCode = 400,
                     IsSuccess = true
                 };
             }

@@ -17,7 +17,12 @@ namespace AviaTour.Application.UseCases.Tours.Handlers.QueryHandlers
 
         public async Task<IEnumerable<Tour>> Handle(GetAllToursQuery request, CancellationToken cancellationToken)
         {
-            return await _context.Tours.Skip(request.Index - 1).Take(request.Size).ToListAsync();
+            var tours = await _context.Tours
+                                 .Include(t => t.Comments)
+                                    .Skip(request.Index - 1)
+                                        .Take(request.Size)
+                                            .ToListAsync(cancellationToken);
+            return tours;
         }
     }
 }
