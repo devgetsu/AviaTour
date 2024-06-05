@@ -20,7 +20,7 @@ namespace AviaTour.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ResponseModel> CreateAdress(CreateAdressCommand news)
+        public async Task<ResponseModel> CreateAdress([FromBody] CreateAdressCommand news)
         {
             var res = await _mediatr.Send(news);
             return res;
