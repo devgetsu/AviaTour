@@ -12,7 +12,7 @@ namespace AviaTour.Application.Abstractions
     {
         DbSet<Comment> Comments { get; set; }
         DbSet<Tour> Tours { get; set; }
-        DbSet<AboutUs> AboutUs { get; set; }
+        DbSet<AboutUsModel> AboutUs { get; set; }
         DbSet<Address> Address { get; set; }
         DbSet<ContactModel> Contacts { get; set; }
         DbSet<EmailAddressModel> Emails { get; set; }
