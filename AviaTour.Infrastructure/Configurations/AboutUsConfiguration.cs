@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace AviaTour.Infrastructure.Configurations
 {
-    public class AboutUsConfiguration : IEntityTypeConfiguration<AboutUs>
+    public class AboutUsConfiguration : IEntityTypeConfiguration<AboutUsModel>
     {
         //public string Address { get; set; }
         //public string Contact { get; set; }
         //public string Email { get; set; }
         //public string Description { get; set; }
 
-        public void Configure(EntityTypeBuilder<AboutUs> builder)
+        public void Configure(EntityTypeBuilder<AboutUsModel> builder)
         {
             builder.Property(x => x.Description)
                 .HasColumnType("text");

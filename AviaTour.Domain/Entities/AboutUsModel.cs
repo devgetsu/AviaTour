@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace AviaTour.Domain.Entities
 {
-    public class AboutUs : BaseEntity
+    public class AboutUsModel : BaseEntity
     {
-        public string Address { get; set; }
-        public string Contact { get; set; }
-        public string Email { get; set; }
+        public List<Address> Addresses { get; set; }
+        public List<ContactModel> Contacts { get; set; }
+        public List<EmailAddressModel> Emails { get; set; }
         public string Description { get; set; }
     }
 }

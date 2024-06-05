@@ -20,7 +20,7 @@ namespace AviaTour.Infrastructure.Persistance
 
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Tour> Tours { get; set; }
-        public DbSet<AboutUs> AboutUs { get; set; }
+        public DbSet<AboutUsModel> AboutUs { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<ContactModel> Contacts { get; set; }
         public DbSet<EmailAddressModel> Emails { get; set; }
