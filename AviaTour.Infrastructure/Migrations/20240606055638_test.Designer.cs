@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AviaTour.Infrastructure.Migrations
 {
     [DbContext(typeof(AviaTourDbContext))]
-    [Migration("20240604061505_test")]
+    [Migration("20240606055638_test")]
     partial class test
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace AviaTour.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("AviaTour.Domain.Entities.AboutUs", b =>
+            modelBuilder.Entity("AviaTour.Domain.Entities.AboutUsModel", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,19 +33,7 @@ namespace AviaTour.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Contact")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -61,6 +49,9 @@ namespace AviaTour.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<long?>("AboutUsModelId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -88,6 +79,8 @@ namespace AviaTour.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AboutUsModelId");
 
                     b.ToTable("Address");
                 });
@@ -119,11 +112,6 @@ namespace AviaTour.Infrastructure.Migrations
                     b.Property<DateTimeOffset>("ModifiedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("To")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
                     b.Property<long>("TourId")
                         .HasColumnType("bigint");
 
@@ -137,13 +125,16 @@ namespace AviaTour.Infrastructure.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("AviaTour.Domain.Entities.Contact", b =>
+            modelBuilder.Entity("AviaTour.Domain.Entities.ContactModel", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<long?>("AboutUsModelId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -151,10 +142,12 @@ namespace AviaTour.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AboutUsModelId");
+
                     b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("AviaTour.Domain.Entities.Email", b =>
+            modelBuilder.Entity("AviaTour.Domain.Entities.EmailAddressModel", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -162,11 +155,16 @@ namespace AviaTour.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
+                    b.Property<long?>("AboutUsModelId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("EmailAddress")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AboutUsModelId");
 
                     b.ToTable("Emails");
                 });
@@ -223,6 +221,13 @@ namespace AviaTour.Infrastructure.Migrations
                     b.ToTable("Tours");
                 });
 
+            modelBuilder.Entity("AviaTour.Domain.Entities.Address", b =>
+                {
+                    b.HasOne("AviaTour.Domain.Entities.AboutUsModel", null)
+                        .WithMany("Addresses")
+                        .HasForeignKey("AboutUsModelId");
+                });
+
             modelBuilder.Entity("AviaTour.Domain.Entities.Comment", b =>
                 {
                     b.HasOne("AviaTour.Domain.Entities.Tour", "Tour")
@@ -232,6 +237,29 @@ namespace AviaTour.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Tour");
+                });
+
+            modelBuilder.Entity("AviaTour.Domain.Entities.ContactModel", b =>
+                {
+                    b.HasOne("AviaTour.Domain.Entities.AboutUsModel", null)
+                        .WithMany("Contacts")
+                        .HasForeignKey("AboutUsModelId");
+                });
+
+            modelBuilder.Entity("AviaTour.Domain.Entities.EmailAddressModel", b =>
+                {
+                    b.HasOne("AviaTour.Domain.Entities.AboutUsModel", null)
+                        .WithMany("Emails")
+                        .HasForeignKey("AboutUsModelId");
+                });
+
+            modelBuilder.Entity("AviaTour.Domain.Entities.AboutUsModel", b =>
+                {
+                    b.Navigation("Addresses");
+
+                    b.Navigation("Contacts");
+
+                    b.Navigation("Emails");
                 });
 
             modelBuilder.Entity("AviaTour.Domain.Entities.Tour", b =>

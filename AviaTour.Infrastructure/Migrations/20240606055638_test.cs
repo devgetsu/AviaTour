@@ -18,59 +18,11 @@ namespace AviaTour.Infrastructure.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Address = table.Column<string>(type: "text", nullable: false),
-                    Contact = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AboutUs", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Address",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Door = table.Column<string>(type: "text", nullable: false),
-                    Street = table.Column<string>(type: "text", nullable: false),
-                    District = table.Column<string>(type: "text", nullable: false),
-                    City = table.Column<string>(type: "text", nullable: false),
-                    ZipCode = table.Column<long>(type: "bigint", nullable: false),
-                    Longitude = table.Column<long>(type: "bigint", nullable: false),
-                    Latitude = table.Column<long>(type: "bigint", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Address", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Contacts",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Contacts", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Emails",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    EmailAddress = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Emails", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,13 +48,75 @@ namespace AviaTour.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Address",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Door = table.Column<string>(type: "text", nullable: false),
+                    Street = table.Column<string>(type: "text", nullable: false),
+                    District = table.Column<string>(type: "text", nullable: false),
+                    City = table.Column<string>(type: "text", nullable: false),
+                    ZipCode = table.Column<long>(type: "bigint", nullable: false),
+                    Longitude = table.Column<long>(type: "bigint", nullable: false),
+                    Latitude = table.Column<long>(type: "bigint", nullable: false),
+                    AboutUsModelId = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Address", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Address_AboutUs_AboutUsModelId",
+                        column: x => x.AboutUsModelId,
+                        principalTable: "AboutUs",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Contacts",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: false),
+                    AboutUsModelId = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contacts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Contacts_AboutUs_AboutUsModelId",
+                        column: x => x.AboutUsModelId,
+                        principalTable: "AboutUs",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Emails",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EmailAddress = table.Column<string>(type: "text", nullable: false),
+                    AboutUsModelId = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Emails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Emails_AboutUs_AboutUsModelId",
+                        column: x => x.AboutUsModelId,
+                        principalTable: "AboutUs",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Comments",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     From = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    To = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     Message = table.Column<string>(type: "character varying(120)", maxLength: 120, nullable: false),
                     TourId = table.Column<long>(type: "bigint", nullable: false),
                     isDeleted = table.Column<bool>(type: "boolean", nullable: false),
@@ -122,17 +136,29 @@ namespace AviaTour.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Address_AboutUsModelId",
+                table: "Address",
+                column: "AboutUsModelId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_TourId",
                 table: "Comments",
                 column: "TourId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Contacts_AboutUsModelId",
+                table: "Contacts",
+                column: "AboutUsModelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Emails_AboutUsModelId",
+                table: "Emails",
+                column: "AboutUsModelId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "AboutUs");
-
             migrationBuilder.DropTable(
                 name: "Address");
 
@@ -147,6 +173,9 @@ namespace AviaTour.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tours");
+
+            migrationBuilder.DropTable(
+                name: "AboutUs");
         }
     }
 }
