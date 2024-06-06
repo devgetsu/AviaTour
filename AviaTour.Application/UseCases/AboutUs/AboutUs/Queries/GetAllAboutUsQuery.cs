@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AviaTour.Application.UseCases.AboutUs.AboutUs.Queries
 {
-    public class GetAllAboutUsQuery : IRequest<IEnumerable<AboutUs>>
+    public class GetAllAboutUsQuery : IRequest<IEnumerable<AboutUsModel>>
     {
     }
 }
