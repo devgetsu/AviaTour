@@ -1,4 +1,5 @@
-﻿using AviaTour.Application;
+﻿using AviaTour.API.Middlewares;
+using AviaTour.Application;
 using AviaTour.Infrastructure;
 
 namespace AviaTour.API
@@ -31,7 +32,7 @@ namespace AviaTour.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseMiddleware<GlobalExceptionHandler>();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
