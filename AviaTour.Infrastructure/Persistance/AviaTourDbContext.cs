@@ -23,6 +23,12 @@ namespace AviaTour.Infrastructure.Persistance
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.Tour)
+                .WithMany(t => t.Comments)
+                .HasForeignKey(c => c.TourId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 

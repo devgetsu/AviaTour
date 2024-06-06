@@ -39,8 +39,8 @@ namespace AviaTour.Application.UseCases.Comments.Handlers.CommandHandlers
                 return new ResponseModel()
                 {
                     Message = ex.Message,
-                    StatusCode = 200,
-                    IsSuccess = true
+                    StatusCode = 500,
+                    IsSuccess = false
                 };
             }
         }

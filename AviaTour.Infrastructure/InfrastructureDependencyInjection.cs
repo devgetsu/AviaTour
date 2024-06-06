@@ -10,7 +10,7 @@ namespace AviaTour.Infrastructure
     {
         public static IServiceCollection AddInfrastructureDependencyInjection(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<IApplicationDbContext,AviaTourDbContext>(options =>
+            services.AddDbContext<IApplicationDbContext, AviaTourDbContext>(options =>
             {
                 options.UseNpgsql(configuration.GetConnectionString("PostgreSQL"));
             });
