@@ -12,7 +12,7 @@ namespace AviaTour.Application.UseCases.Tours.Handlers.QueryHandlers
 
         public async Task<Tour> Handle(GetTourByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _context.Tours.FirstOrDefaultAsync(x => x.Id == request.Id) ?? throw new Exception();
+            return await _context.Tours.Include(x => x.Comments).FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken) ?? throw new Exception();
         }
     }
 }

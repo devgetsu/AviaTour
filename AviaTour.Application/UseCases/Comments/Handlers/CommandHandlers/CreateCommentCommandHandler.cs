@@ -3,6 +3,7 @@ using AviaTour.Application.Models;
 using AviaTour.Application.UseCases.Comments.Commands;
 using AviaTour.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,12 +1,7 @@
 ﻿using AviaTour.Application.Abstractions;
 using AviaTour.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AviaTour.Infrastructure.Persistance
 {
@@ -15,7 +10,6 @@ namespace AviaTour.Infrastructure.Persistance
         public AviaTourDbContext(DbContextOptions<AviaTourDbContext> options)
             : base(options)
         {
-            Database.Migrate();
         }
 
         public DbSet<Comment> Comments { get; set; }

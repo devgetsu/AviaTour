@@ -26,7 +26,7 @@ namespace AviaTour.Infrastructure.Configurations
                 .HasColumnType("text");
 
 
-            builder.HasQueryFilter(x => x.IsDeleted != false);
+            builder.HasQueryFilter(x => x.IsDeleted == false);
         }
     }
 }
