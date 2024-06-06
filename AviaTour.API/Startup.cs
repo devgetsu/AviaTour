@@ -33,7 +33,15 @@ namespace AviaTour.API
                 app.UseSwaggerUI();
             }
             app.UseMiddleware<GlobalExceptionHandler>();
+
             app.UseHttpsRedirection();
+
+            app.UseCors(options =>
+            {
+                options.AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin();
+            });
 
             app.UseAuthorization();
 
