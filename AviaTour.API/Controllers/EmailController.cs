@@ -31,6 +31,7 @@ namespace AviaTour.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<EmailAddressModel>> GetAllEmails()
         {
+            throw new Exception();
             var result = await _mediatr.Send(new GetAllEmailsQuery());
             return result;
         }
