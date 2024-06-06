@@ -13,7 +13,7 @@ namespace AviaTour.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
-            builder.HasQueryFilter(x => x.isDeleted != false);
+            builder.HasQueryFilter(x => x.isDeleted == false);
 
             builder.Property(x => x.From)
                 .HasMaxLength(50);

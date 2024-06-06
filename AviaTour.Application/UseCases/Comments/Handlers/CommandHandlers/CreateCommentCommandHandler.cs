@@ -3,6 +3,7 @@ using AviaTour.Application.Models;
 using AviaTour.Application.UseCases.Comments.Commands;
 using AviaTour.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,20 @@ namespace AviaTour.Application.UseCases.Comments.Handlers.CommandHandlers
         {
             try
             {
+                var tour = await _context.Tours.FirstOrDefaultAsync(x => x.Id == request.TourId);
+
+                if (tour == null)
+                {
+                    throw new Exception("Tour not found.");
+                }
+
                 var comment = new Comment()
                 {
                     From = request.From,
                     Message = request.Message,
                     TourId = request.TourId,
                     CreatedAt = DateTimeOffset.UtcNow,
+                    Tour = tour
                 };
 
                 await _context.Comments.AddAsync(comment);
@@ -41,9 +50,9 @@ namespace AviaTour.Application.UseCases.Comments.Handlers.CommandHandlers
             {
                 return new ResponseModel()
                 {
-                    Message = ex.Message,
+                    Message = ex.ToString(),
                     StatusCode = 400,
-                    IsSuccess = true
+                    IsSuccess = false
                 };
             }
         }

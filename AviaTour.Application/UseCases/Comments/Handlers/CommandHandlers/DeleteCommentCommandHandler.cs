@@ -20,11 +20,13 @@ namespace AviaTour.Application.UseCases.Comments.Handlers.CommandHandlers
             try
             {
                 var comment = await _context.Comments.FirstOrDefaultAsync(x => x.Id == request.Id);
+
                 if (comment == null)
                     throw new Exception();
 
                 comment.isDeleted = true;
                 comment.DeletedAt = DateTimeOffset.UtcNow;
+
                 await _context.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel()
@@ -38,9 +40,9 @@ namespace AviaTour.Application.UseCases.Comments.Handlers.CommandHandlers
             {
                 return new ResponseModel()
                 {
-                    Message = "Created",
+                    Message = "Error",
                     StatusCode = 200,
-                    IsSuccess = true
+                    IsSuccess = false
                 };
             }
         }

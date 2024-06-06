@@ -65,6 +65,7 @@ namespace AviaTour.Application.UseCases.Tours.Handlers.CommandHandlers
                 tour.Where = request.Where;
                 tour.WhereEx = request.WhereEx;
                 tour.Description = request.Description;
+                tour.Price = request.Price;
                 _context.Tours.Update(tour);
 
                 await _context.SaveChangesAsync(cancellationToken);
