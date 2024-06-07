@@ -19,7 +19,7 @@ namespace AviaTour.Application.UseCases.Extensions
 
         public async Task LogError(Exception ex, CancellationToken cancellationToken = default)
         {
-           await _botClient.SendTextMessageAsync(chatId: _groupid, text: ex.ToString(), cancellationToken: cancellationToken);
+           await _botClient.SendTextMessageAsync(chatId: _groupid, text: ex.Message, cancellationToken: cancellationToken);
         }
     }
 }
