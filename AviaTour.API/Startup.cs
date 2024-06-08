@@ -1,6 +1,7 @@
 ﻿using AviaTour.API.Middlewares;
 using AviaTour.Application;
 using AviaTour.Infrastructure;
+using Newtonsoft.Json;
 
 namespace AviaTour.API
 {
@@ -17,17 +18,21 @@ namespace AviaTour.API
 
         public void ConfigureServices(IServiceCollection services, ILoggingBuilder Logging)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            }); ;
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
             services.AddInfrastructureDependencyInjection(configRoot);
             services.AddApplicationDependencyInjection();
+
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment env)
         {
-            if (app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
@@ -35,6 +40,8 @@ namespace AviaTour.API
             app.UseMiddleware<GlobalExceptionHandler>();
 
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
 
             app.UseCors(options =>
             {

@@ -25,14 +25,8 @@ namespace AviaTour.API.Middlewares
             }
             catch (Exception ex)
             {
-                //Write to Telegram channel
 
                 await _writeToTelegramBotService.LogError(ex);
-
-
-                //Write to Log file
-
-
 
                 await HandleExceptionAsync(context, ex, context.Response.StatusCode);
             }

@@ -14,7 +14,7 @@ namespace AviaTour.API.Controllers
         private readonly IMediator _mediator = mediator;
 
         [HttpPost]
-        public async Task<ActionResult<ResponseModel>> CreateTourAsync(CreateTourCommand command)
+        public async Task<ActionResult<ResponseModel>> CreateTourAsync([FromForm] CreateTourCommand command)
         {
             if (!ModelState.IsValid)
                 throw new Exception();
@@ -50,7 +50,7 @@ namespace AviaTour.API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<ResponseModel>> UpdateTourAsync(UpdateTourCommand command)
+        public async Task<ActionResult<ResponseModel>> UpdateTourAsync([FromForm] UpdateTourCommand command)
         {
             if (!ModelState.IsValid)
                 throw new Exception();
