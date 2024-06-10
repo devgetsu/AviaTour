@@ -1,4 +1,5 @@
-﻿using AviaTour.API.Middlewares;
+﻿using AviaTour.API.Interfaces;
+using AviaTour.API.Middlewares;
 using AviaTour.Application;
 using AviaTour.Infrastructure;
 using Newtonsoft.Json;
@@ -27,7 +28,7 @@ namespace AviaTour.API
 
             services.AddInfrastructureDependencyInjection(configRoot);
             services.AddApplicationDependencyInjection();
-
+            services.AddSingleton<ILoggerManager, LoggerManager>();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment env)
