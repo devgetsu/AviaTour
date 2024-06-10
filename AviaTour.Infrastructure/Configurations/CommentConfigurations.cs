@@ -19,8 +19,7 @@ namespace AviaTour.Infrastructure.Configurations
                 .HasMaxLength(50);
 
             builder.Property(x => x.Message)
-                .HasMaxLength(120);
-
+                .HasMaxLength(240);
         }
     }
 }
