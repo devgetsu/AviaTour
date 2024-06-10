@@ -19,27 +19,25 @@ namespace AviaTour.API.Middlewares
         {
             try
             {
-                _logger.LogInfo("Here is info message from the controller.");
+                _logger.LogWarn(context.Request.Headers.ToString());
                 await _requestDelegate(context);
             }
             catch (ValidationException ex)
             {
                 int code = 400;
-                _logger.LogInfo("Here is info message from the controller.");
-                await HandleExceptionAsync(context, ex, code);
+                HandleException(context, ex, code);
             }
             catch (Exception ex)
             {
 
                 await _writeToTelegramBotService.LogError(ex);
-                _logger.LogInfo("Here is info message from the controller.");
-                await HandleExceptionAsync(context, ex, context.Response.StatusCode);
+                HandleException(context, ex, context.Response.StatusCode);
             }
         }
 
-        private async Task HandleExceptionAsync(HttpContext context, Exception ex, int code)
+        private void HandleException(HttpContext context, Exception ex, int code)
         {
-            _logger.LogInfo("Here is info message from the controller.");
+            _logger.LogInfo(ex.ToString());
             context.Response.StatusCode = code;
             return;
         }
