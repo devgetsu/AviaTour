@@ -1,15 +1,19 @@
 ﻿using AviaTour.Application.Abstractions;
 using AviaTour.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using AviaTour.Domain.Entities.Auth;
 
 namespace AviaTour.Infrastructure.Persistance
 {
-    public class AviaTourDbContext : DbContext, IApplicationDbContext
+    public class AviaTourDbContext : IdentityDbContext<User, IdentityRole<long>, long>, IApplicationDbContext
     {
         public AviaTourDbContext(DbContextOptions<AviaTourDbContext> options)
             : base(options)
         {
+
         }
 
         public DbSet<Comment> Comments { get; set; }

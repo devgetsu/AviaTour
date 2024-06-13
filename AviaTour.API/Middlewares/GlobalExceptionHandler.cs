@@ -19,7 +19,7 @@ namespace AviaTour.API.Middlewares
         {
             try
             {
-                _logger.LogWarn(context.Request.Headers.ToString());
+                _logger.LogWarn(context.Request.Headers.ToString()!);
                 await _requestDelegate(context);
             }
             catch (ValidationException ex)

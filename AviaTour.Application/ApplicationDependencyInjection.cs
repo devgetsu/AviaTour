@@ -1,4 +1,5 @@
-﻿using AviaTour.Application.UseCases.Extensions;
+﻿using AviaTour.Application.UseCases.AuthService;
+using AviaTour.Application.UseCases.Extensions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -12,6 +13,8 @@ namespace AviaTour.Application
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
+            services.AddScoped<IAuthService, AuthService>();
+
             services.AddSingleton<TelegramBotClient>(provider =>
             {
                 var botToken = $"7317269448:AAEcfzvaG-SgA5TCprIH6-pGhv1za2aMeZ0";
@@ -19,6 +22,7 @@ namespace AviaTour.Application
             });
 
             services.AddSingleton<IWriteToTelegramBotService, WriteToTelegramBotService>();
+            
             return services;
         }
     }
