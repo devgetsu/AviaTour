@@ -22,6 +22,16 @@ namespace AviaTour.API
 
         public void ConfigureServices(IServiceCollection services, ILoggingBuilder Logging)
         {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
+
             services.AddApplicationDependencyInjection();
             services.AddInfrastructureDependencyInjection(configRoot);
 
@@ -53,12 +63,7 @@ namespace AviaTour.API
 
             app.UseStaticFiles();
 
-            app.UseCors(options =>
-            {
-                options.AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowAnyOrigin();
-            });
+            app.UseCors();
 
             app.UseAuthentication();
 

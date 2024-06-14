@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AviaTour.API.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthsController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly UserManager<User> _userManager;
@@ -17,7 +17,7 @@ namespace AviaTour.API.Controllers
         private readonly IAuthService _authService;
         private readonly Random _random;
 
-        public AuthController(IConfiguration configuration, UserManager<User> userManager, SignInManager<User> signInManager, IAuthService authService, Random random)
+        public AuthsController(IConfiguration configuration, UserManager<User> userManager, SignInManager<User> signInManager, IAuthService authService, Random random)
         {
             _configuration = configuration;
             _userManager = userManager;
@@ -124,9 +124,9 @@ namespace AviaTour.API.Controllers
         //}
 
 
-        [HttpPost]
+        [HttpPost("ExternalLogin")]
         [AllowAnonymous]
-        public async Task<IActionResult> ExternalLogin(ExternalLoginDTO model)
+        public async Task<IActionResult> ExternalLogin([FromBody] ExternalLoginDTO model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
 
