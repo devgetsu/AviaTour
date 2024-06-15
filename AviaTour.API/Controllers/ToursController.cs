@@ -53,12 +53,13 @@ namespace AviaTour.API.Controllers
         public async Task<ActionResult<ResponseModel>> UpdateTourAsync([FromForm] UpdateTourCommand command)
         {
             if (!ModelState.IsValid)
-                throw new Exception();
+                return BadRequest(ModelState);
 
             var result = await _mediator.Send(command);
 
             return Ok(result);
         }
+
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<ResponseModel>> Delete(long id)
