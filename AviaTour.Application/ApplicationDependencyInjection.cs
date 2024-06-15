@@ -1,5 +1,6 @@
 ﻿using AviaTour.Application.UseCases.AuthService;
-using AviaTour.Application.UseCases.Extensions;
+using AviaTour.Application.UseCases.Extensions.EmailSenderService;
+using AviaTour.Application.UseCases.Extensions.TelegramSenderService;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -14,6 +15,7 @@ namespace AviaTour.Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IEmailSender, EmailSender>();
 
             services.AddSingleton<TelegramBotClient>(provider =>
             {

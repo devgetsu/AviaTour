@@ -1,5 +1,5 @@
 ﻿using AviaTour.API.Interfaces;
-using AviaTour.Application.UseCases.Extensions;
+using AviaTour.Application.UseCases.Extensions.TelegramSenderService;
 using System.ComponentModel.DataAnnotations;
 
 namespace AviaTour.API.Middlewares
