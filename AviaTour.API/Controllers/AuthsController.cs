@@ -61,46 +61,47 @@ namespace AviaTour.API.Controllers
 
         //}
 
-        //[HttpPost]
-        //public async Task<IActionResult> Login(LoginDTO login)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        throw new Exception();
-        //    }
-        //    var user = await _userManager.FindByEmailAsync(login.Email);
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginDTO login)
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new Exception();
+            }
 
-        //    if (user == null)
-        //    {
-        //        return BadRequest(new TokenDTO()
-        //        {
-        //            Message = "Email Not Found!",
-        //            isSuccess = false,
-        //            Token = ""
-        //        });
-        //    }
+            var user = await _userManager.FindByEmailAsync(login.Email);
 
-        //    var checker = await _userManager.CheckPasswordAsync(user, login.Password);
-        //    if (!checker)
-        //    {
-        //        return BadRequest(new TokenDTO()
-        //        {
-        //            Message = "Password do not match!",
-        //            isSuccess = false,
-        //            Token = ""
-        //        });
-        //    }
+            if (user == null)
+            {
+                return BadRequest(new TokenDTO()
+                {
+                    Message = "Email Not Found!",
+                    isSuccess = false,
+                    Token = ""
+                });
+            }
 
-        //    var token = _authService.GenerateToken(user);
+            var checker = await _userManager.CheckPasswordAsync(user, login.Password);
 
-        //    return Ok(new TokenDTO()
-        //    {
-        //        Token = token,
-        //        isSuccess = true,
-        //        Message = "Success"
-        //    });
+            if (!checker)
+            {
+                return BadRequest(new TokenDTO()
+                {
+                    Message = "Password do not match!",
+                    isSuccess = false,
+                    Token = ""
+                });
+            }
 
-        //}
+            var token = _authService.GenerateToken(user);
+
+            return Ok(new TokenDTO()
+            {
+                Token = token,
+                isSuccess = true,
+                Message = "Success"
+            });
+        }
 
         //[HttpGet]
         //public async Task<List<User>> GetAll()
@@ -139,6 +140,7 @@ namespace AviaTour.API.Controllers
                     Name = model.FirstName,
                     Surname = model.LastName,
                     Email = model.Email,
+                    EmailConfirmed = true,
                     PhotoUrl = model.PhotoUrl,
                     Role = "User"
                 };

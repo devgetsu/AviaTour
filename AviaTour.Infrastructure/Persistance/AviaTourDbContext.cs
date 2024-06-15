@@ -13,7 +13,7 @@ namespace AviaTour.Infrastructure.Persistance
         public AviaTourDbContext(DbContextOptions<AviaTourDbContext> options)
             : base(options)
         {
-
+            Database.Migrate();
         }
 
         public DbSet<Comment> Comments { get; set; }

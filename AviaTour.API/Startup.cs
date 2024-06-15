@@ -48,6 +48,7 @@ namespace AviaTour.API
             services.AddSwaggerGen();
         
             services.AddSingleton<ILoggerManager, LoggerManager>();
+            services.AddSingleton<Random>();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment env)
