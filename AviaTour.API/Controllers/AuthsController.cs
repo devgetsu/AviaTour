@@ -1,9 +1,11 @@
-﻿using AviaTour.Application.UseCases.AuthService;
+﻿using AviaTour.Application.Models;
+using AviaTour.Application.UseCases.AuthService;
 using AviaTour.Domain.Entities.Auth;
 using AviaTour.Domain.Entities.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AviaTour.API.Controllers
 {
@@ -26,103 +28,83 @@ namespace AviaTour.API.Controllers
             _random = random;
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Register(RegisterDTO register)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        throw new Exception();
-        //    }
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register(RegisterDTO register)
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new Exception();
+            }
 
-        //    var user = new User()
-        //    {
-        //        UserName = register.Name + register.Surname,
-        //        Name = register.Name,
-        //        Surname = register.Surname,
-        //        Email = register.Email,
-        //        Password = register.Password,
-        //        PhoneNumber = register.PhoneNumber,
-        //        Role = "User"
-        //    };
+            var user = new User()
+            {
+                Id = _random.NextInt64(),
+                UserName = register.Name + register.Surname,
+                Name = register.Name,
+                Surname = register.Surname,
+                Email = register.Email,
+                EmailConfirmed = true,
+                Password = register.Password,
+                PhoneNumber = register.PhoneNumber,
+                Role = "User"
+            };
 
-        //    var result = await _userManager.CreateAsync(user, register.Password);
+            var result = await _userManager.CreateAsync(user, register.Password);
 
-        //    if (!result.Succeeded)
-        //        throw new Exception();
+            if (!result.Succeeded)
+                throw new Exception();
 
-        //    await _userManager.AddToRoleAsync(user, "User");
+            await _userManager.AddToRoleAsync(user, "User");
 
-        //    return Ok(new ResponseModel()
-        //    {
-        //        IsSuccess = true,
-        //        Message = "Successfully created",
-        //        StatusCode = 201
-        //    });
+            return Ok(new ResponseModel()
+            {
+                IsSuccess = true,
+                Message = "Successfully created",
+                StatusCode = 201
+            });
+        }
 
-        //}
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginDTO login)
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new Exception();
+            }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Login(LoginDTO login)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        throw new Exception();
-        //    }
-        //    var user = await _userManager.FindByEmailAsync(login.Email);
+            var user = await _userManager.FindByEmailAsync(login.Email);
 
-        //    if (user == null)
-        //    {
-        //        return BadRequest(new TokenDTO()
-        //        {
-        //            Message = "Email Not Found!",
-        //            isSuccess = false,
-        //            Token = ""
-        //        });
-        //    }
+            if (user == null)
+            {
+                return BadRequest(new TokenDTO()
+                {
+                    Message = "Email Not Found!",
+                    isSuccess = false,
+                    Token = ""
+                });
+            }
 
-        //    var checker = await _userManager.CheckPasswordAsync(user, login.Password);
-        //    if (!checker)
-        //    {
-        //        return BadRequest(new TokenDTO()
-        //        {
-        //            Message = "Password do not match!",
-        //            isSuccess = false,
-        //            Token = ""
-        //        });
-        //    }
+            var checker = await _userManager.CheckPasswordAsync(user, login.Password);
 
-        //    var token = _authService.GenerateToken(user);
+            if (!checker)
+            {
+                return BadRequest(new TokenDTO()
+                {
+                    Message = "Password do not match!",
+                    isSuccess = false,
+                    Token = ""
+                });
+            }
 
-        //    return Ok(new TokenDTO()
-        //    {
-        //        Token = token,
-        //        isSuccess = true,
-        //        Message = "Success"
-        //    });
+            var token = _authService.GenerateToken(user);
 
-        //}
-
-        //[HttpGet]
-        //public async Task<List<User>> GetAll()
-        //{
-        //    var result = await _userManager.Users.ToListAsync();
-
-        //    return result;
-        //}
-
-
-
-        //[HttpGet]
-        //public async Task<User> GetById(Guid id)
-        //{
-        //    var result = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
-
-        //    if (result == null)
-        //        throw new Exception();
-
-        //    return result;
-        //}
-
+            return Ok(new TokenDTO()
+            {
+                Token = token,
+                isSuccess = true,
+                Message = "Success"
+            });
+        }
 
         [HttpPost("ExternalLogin")]
         [AllowAnonymous]
@@ -139,6 +121,7 @@ namespace AviaTour.API.Controllers
                     Name = model.FirstName,
                     Surname = model.LastName,
                     Email = model.Email,
+                    EmailConfirmed = true,
                     PhotoUrl = model.PhotoUrl,
                     Role = "User"
                 };
@@ -162,6 +145,25 @@ namespace AviaTour.API.Controllers
                 isSuccess = true,
                 Message = "Success"
             });
+        }
+
+        [HttpGet]
+        public async Task<List<User>> GetAll()
+        {
+            var result = await _userManager.Users.ToListAsync();
+
+            return result;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<User> GetById(long id)
+        {
+            var result = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (result == null)
+                throw new Exception();
+
+            return result;
         }
     }
 }
