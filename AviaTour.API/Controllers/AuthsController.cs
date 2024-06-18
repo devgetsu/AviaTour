@@ -126,7 +126,10 @@ namespace AviaTour.API.Controllers
                     Role = "User"
                 };
 
-                await _userManager.CreateAsync(user);
+                var result = await _userManager.CreateAsync(user);
+
+                if (!result.Succeeded)
+                    throw new Exception();
 
                 await _userManager.AddToRoleAsync(user, "User");
             }
