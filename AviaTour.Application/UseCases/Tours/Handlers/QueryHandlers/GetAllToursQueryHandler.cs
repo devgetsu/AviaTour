@@ -9,20 +9,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AviaTour.Application.UseCases.Tours.Handlers.QueryHandlers
+namespace AviaTour.Application.UseCases.Tours.Handlers.QueryHandlers;
+public class GetAllToursQueryHandler(IApplicationDbContext context) : IRequestHandler<GetAllToursQuery, IEnumerable<Tour>>
 {
-    public class GetAllToursQueryHandler(IApplicationDbContext context) : IRequestHandler<GetAllToursQuery, IEnumerable<Tour>>
-    {
-        private readonly IApplicationDbContext _context = context;
+    private readonly IApplicationDbContext _context = context;
 
-        public async Task<IEnumerable<Tour>> Handle(GetAllToursQuery request, CancellationToken cancellationToken)
-        {
-            var tours = await _context.Tours
-                                 .Include(t => t.Comments)
-                                    .Skip(request.Index - 1)
-                                        .Take(request.Size)
-                                            .ToListAsync(cancellationToken);
-            return tours;
-        }
+    public async Task<IEnumerable<Tour>> Handle(GetAllToursQuery request, CancellationToken cancellationToken)
+    {
+        var tours = await _context.Tours
+                             .Include(t => t.Comments)
+                                .Skip(request.Index - 1)
+                                    .Take(request.Size)
+                                        .ToListAsync(cancellationToken);
+        return tours;
     }
 }

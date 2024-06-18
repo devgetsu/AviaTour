@@ -20,9 +20,4 @@
 	  <FrameworkReference Include="Microsoft.AspNetCore.App" />  
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCases\Tours\Handlers\QueryHandlers\" />
-    <Folder Include="UseCases\Tours\Queries\" />
-  </ItemGroup>
-
 </Project>

@@ -37,6 +37,19 @@ namespace AviaTour.API.Controllers
             return Ok(result);
         }
 
+        [Route("ByTop")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Tour>>> GetTourByCommentCountAsync([FromQuery] int size)
+        {
+            var query = new GetTourByCommentCount()
+            {
+                Size = size
+            };
+
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Tour>> GetTourById(long id)
         {
