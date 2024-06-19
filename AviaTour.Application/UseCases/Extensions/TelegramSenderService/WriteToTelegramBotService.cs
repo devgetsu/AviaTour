@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot;
 
-namespace AviaTour.Application.UseCases.Extensions
+namespace AviaTour.Application.UseCases.Extensions.TelegramSenderService
 {
     public class WriteToTelegramBotService : IWriteToTelegramBotService
     {
@@ -19,7 +19,7 @@ namespace AviaTour.Application.UseCases.Extensions
 
         public async Task LogError(Exception ex, CancellationToken cancellationToken = default)
         {
-           await _botClient.SendTextMessageAsync(chatId: _groupid, text: ex.Message, cancellationToken: cancellationToken);
+            await _botClient.SendTextMessageAsync(chatId: _groupid, text: ex.Message, cancellationToken: cancellationToken);
         }
     }
 }

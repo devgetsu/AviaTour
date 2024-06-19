@@ -37,6 +37,19 @@ namespace AviaTour.API.Controllers
             return Ok(result);
         }
 
+        [Route("ByTop")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Tour>>> GetTourByCommentCountAsync([FromQuery] int size)
+        {
+            var query = new GetTourByCommentCount()
+            {
+                Size = size
+            };
+
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Tour>> GetTourById(long id)
         {
@@ -53,12 +66,13 @@ namespace AviaTour.API.Controllers
         public async Task<ActionResult<ResponseModel>> UpdateTourAsync([FromForm] UpdateTourCommand command)
         {
             if (!ModelState.IsValid)
-                throw new Exception();
+                return BadRequest(ModelState);
 
             var result = await _mediator.Send(command);
 
             return Ok(result);
         }
+
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<ResponseModel>> Delete(long id)

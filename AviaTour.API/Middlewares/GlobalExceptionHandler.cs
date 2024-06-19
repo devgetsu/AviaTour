@@ -1,5 +1,5 @@
 ﻿using AviaTour.API.Interfaces;
-using AviaTour.Application.UseCases.Extensions;
+using AviaTour.Application.UseCases.Extensions.TelegramSenderService;
 using System.ComponentModel.DataAnnotations;
 
 namespace AviaTour.API.Middlewares
@@ -19,7 +19,7 @@ namespace AviaTour.API.Middlewares
         {
             try
             {
-                _logger.LogWarn(context.Request.Headers.ToString());
+                _logger.LogWarn(context.Request.Headers.ToString()!);
                 await _requestDelegate(context);
             }
             catch (ValidationException ex)

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AviaTour.Application.UseCases.Extensions
+namespace AviaTour.Application.UseCases.Extensions.TelegramSenderService
 {
     public interface IWriteToTelegramBotService
     {
