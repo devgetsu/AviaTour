@@ -39,7 +39,7 @@ namespace AviaTour.API.Controllers
             var user = new User()
             {
                 Id = _random.NextInt64(),
-                UserName = register.FullName,
+                UserName = register.FullName.Replace(" ", ""),
                 Name = register.FullName.Split(" ")[0],
                 Surname = register.FullName.Split(" ")[1],
                 Email = register.Email,
@@ -58,9 +58,9 @@ namespace AviaTour.API.Controllers
 
             return Ok(new ResponseModel()
             {
-                IsSuccess = true,
                 Message = "Successfully created",
-                StatusCode = 201
+                StatusCode = 201,
+                IsSuccess = true
             });
         }
 
