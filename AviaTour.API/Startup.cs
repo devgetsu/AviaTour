@@ -24,6 +24,7 @@ namespace AviaTour.API
         {
             services.AddCors(options =>
             {
+
                 options.AddDefaultPolicy(policy =>
                 {
                     policy.AllowAnyOrigin()
