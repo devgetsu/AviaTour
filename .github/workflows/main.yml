@@ -1,0 +1,66 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Kodni yuklash
+      uses: actions/checkout@v3
+
+    - name: .NETni o'rnatish
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x' # .NET 8 versiyasini ishlatish
+
+    - name: Dependensiyalarni tiklash
+      run: dotnet restore
+
+    - name: Loyihani yig'ish (build)
+      run: dotnet build --no-restore --configuration Release
+
+    - name: Testlarni ishga tushirish
+      run: dotnet test --no-build --verbosity normal
+
+  deploy:
+    runs-on: windows-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Kodni yuklash
+      uses: actions/checkout@v3
+
+    - name: .NETni o'rnatish
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: IIS serverga deploy qilish
+      run: |
+        echo IIS serverga deploy qilinmoqda...
+        
+        # IIS App Pool'ni to'xtatish
+        # Stop-WebAppPool -Name 'DefaultAppPool'
+        
+        # Web-saytni to'xtatish
+        # Stop-Website -Name 'Default Web Site'
+        
+        # API'ni IIS serverga publish qilish
+        # dotnet publish ./AviaTour.API/AviaTour.API.csproj -c Release -o 'C:\inetpub\wwwroot\AviaTour'
+        
+        # IIS App Pool'ni qayta ishga tushirish
+        # Start-WebAppPool -Name 'DefaultAppPool'
+        
+        # Web-saytni qayta ishga tushirish
+        # Start-Website -Name 'Default Web Site'
