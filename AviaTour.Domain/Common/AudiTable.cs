@@ -8,8 +8,8 @@ namespace AviaTour.Domain.Common
 {
     public abstract class AudiTable : BaseEntity
     {
-        public DateTimeOffset CreatedAt { get; set; }
-        public DateTimeOffset ModifiedAt { get; set; }
-        public DateTimeOffset DeletedAt { get; set; }
+        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? ModifiedAt { get; set; }
+        public DateTimeOffset? DeletedAt { get; set; }
     }
 }

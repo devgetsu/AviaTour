@@ -10,11 +10,11 @@ namespace AviaTour.Domain.Entities
 {
     public class Tour : AudiTable
     {
-        public string WhereEx {  get; set; }
-        public string Where { get; set; }
-        public string Subtitle { get; set; }
-        public string Description { get; set; }
-        public string PicturePath { get; set; }
+        public required string WhereEx {  get; set; }
+        public required string Where { get; set; }
+        public required string Subtitle { get; set; }
+        public required string Description { get; set; }
+        public required string PicturePath { get; set; }
         public long Price { get; set; }
         public bool IsDeleted { get; set; } = false;
         public List<Comment> Comments { get; set; }

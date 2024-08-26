@@ -9,6 +9,6 @@ namespace AviaTour.Domain.Entities
 {
     public class ContactModel : BaseEntity
     {
-        public string PhoneNumber { get; set; }
+        public required string PhoneNumber { get; set; }
     }
 }

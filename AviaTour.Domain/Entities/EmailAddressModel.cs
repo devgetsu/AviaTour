@@ -10,6 +10,6 @@ namespace AviaTour.Domain.Entities
 {
     public class EmailAddressModel : BaseEntity
     {
-        public string EmailAddress { get; set; }
+        public required string EmailAddress { get; set; }
     }
 }
