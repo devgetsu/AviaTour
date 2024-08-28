@@ -26,9 +26,6 @@ namespace AviaTour.Application.UseCases.AboutUs.AboutUs.Handlers.CommandHandlers
 
             if (res != null)
             {
-                res.Addresses = request.Addresses;
-                res.Contacts = request.Contacts;
-                res.Emails = request.Emails;
                 res.Description = request.Description;
 
                 _context.AboutUs.Update(res);

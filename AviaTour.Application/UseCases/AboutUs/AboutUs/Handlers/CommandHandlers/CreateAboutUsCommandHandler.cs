@@ -23,21 +23,6 @@ namespace AviaTour.Application.UseCases.AboutUs.AboutUs.Handlers.CommandHandlers
                 Description = request.Description
             };
 
-            foreach (var addressId in request.AddressIds)
-            {
-                info.Addresses.Add(await _context.Address.FirstAsync(x => x.Id == addressId));
-            }
-
-            foreach (var contactId in request.ContactIds)
-            {
-                info.Contacts.Add(await _context.Contacts.FirstAsync(x => x.Id == contactId));
-            }
-
-            foreach (var emailId in request.EmailIds)
-            {
-                info.Emails.Add(await _context.Emails.FirstAsync(x => x.Id == emailId));
-            }
-
             await _context.AboutUs.AddAsync(info);
 
             await _context.SaveChangesAsync(cancellationToken);
